@@ -23,9 +23,9 @@
                             </v-list-tile-action>
                         </v-list-tile>
                     </v-list>
-                    <p v-else class="headline text-xs-center py-5 grey lighten-4">
+                    <base-well v-else>
                         You don't have any talent in your roster.
-                    </p>
+                    </base-well>
                 </v-card>
             </v-flex>
         </v-layout>
@@ -33,15 +33,18 @@
 </template>
 
 <script>
-
+import BaseWell from './BaseWell'
 export default {
     name: 'FireTalent',
+    components: {
+        'base-well': BaseWell,
+    },
     computed: {
         freeAgents: function() {
             return this.sharedData.gameState.freeAgents;
         },
         roster: function() {
-            return this.sharedData.gameState.roster;
+            return this.sharedData.gameState.company.roster;
         },
     },
     props: {

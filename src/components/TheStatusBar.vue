@@ -26,7 +26,13 @@
                 </v-list>
             </v-menu>
             <v-flex xs2 class="subheading pt-3">
-                <BaseRosterSummary :roster="gameState.roster"/>
+                <span>{{ gameState.company.name }}</span>
+            </v-flex>
+            <v-flex xs2 class="subheading pt-3">
+                <span>{{ formatCurrency(gameState.company.bank) }}</span>
+            </v-flex>
+            <v-flex xs2 class="subheading pt-3">
+                <BaseRosterSummary :roster="gameState.company.roster"/>
             </v-flex>
             <v-spacer />
             <v-flex xs2 class="subheading pt-3">
@@ -46,6 +52,7 @@
 import BaseGameClock from './BaseGameClock'
 import BaseRosterSummary from './BaseRosterSummary'
 import InGameState from '../models/InGameState'
+import Mixins from '../Mixins'
 
 export default {
     components: {
@@ -80,6 +87,7 @@ export default {
             }
         },
     },
+    mixins: [Mixins],
     props: {
         gameState: InGameState,
     }

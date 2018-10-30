@@ -17,15 +17,13 @@
                             </v-list-tile-content>
 
                             <v-list-tile-action>
-                                <v-btn icon ripple @click="hire(talent)">
+                                <v-btn icon ripple @click="hire(talent)" :disabled="!company.canHire(talent)">
                                     <v-icon color="grey lighten-1">add</v-icon>
                                 </v-btn>
                             </v-list-tile-action>
                         </v-list-tile>
                     </v-list>
-                    <p v-else class="headline text-xs-center py-5 grey lighten-4">
-                        There aren't any free agents right now.
-                    </p>
+                    <base-well v-else>There aren't any free agents right now.</base-well>
                 </v-card>
             </v-flex>
         </v-layout>
@@ -34,14 +32,22 @@
 
 <script>
 
+import BaseWell from './BaseWell'
+
 export default {
     name: 'HireTalent',
+    components: {
+        'base-well': BaseWell,
+    },
     computed: {
+        company: function() {
+            return this.sharedData.gameState.company;
+        },
         freeAgents: function() {
             return this.sharedData.gameState.freeAgents;
         },
         roster: function() {
-            return this.sharedData.gameState.roster;
+            return this.company.roster;
         },
     },
     props: {
@@ -49,7 +55,7 @@ export default {
     },
     methods: {
         hire: function(talent) {
-            if (this.roster.hire(talent)) {
+            if (this.company.hire(talent)) {
                 this.freeAgents.fire(talent);
             }
         }
