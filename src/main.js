@@ -7,6 +7,7 @@ import App from './App.vue'
 import FireTalent from './components/FireTalent'
 import HireTalent from './components/HireTalent'
 import InGameState from './models/InGameState'
+import ViewRoster from './components/ViewRoster'
 
 Vue.use(VueRouter);
 Vue.config.productionTip = false;
@@ -28,6 +29,14 @@ const routes = [
         name: 'Hire Talent',
         path: '/hire',
         component: HireTalent,
+        props: {
+            sharedData: sharedData,
+        },
+    },
+    {
+        name: 'View Roster',
+        path: '/roster',
+        component: ViewRoster,
         props: {
             sharedData: sharedData,
         },

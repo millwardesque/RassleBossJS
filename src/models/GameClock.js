@@ -1,6 +1,8 @@
+import MessageHandler from './MessageHandler'
+
 export default class GameClock {
     static WeeksPerMonth = 4;
-    static MonthsPerYear = 4;
+    static MonthsPerYear = 12;
 
     constructor(year, month, week, weekDurationInMs) {
         this._year = year;
@@ -40,8 +42,27 @@ export default class GameClock {
         return this._week;
     }
     set week(w) {
-        this._week = w;
-        this.normalize();
+        if (w != this._week) {
+            let oldDate = this.asGameDate()
+
+            this._week = w;
+            this.normalize();
+
+            let newDate = this.asGameDate();
+
+            MessageHandler.sendMessage('clock-datechange', {
+                'oldDate': oldDate,
+                'newDate': newDate,
+            });
+        }
+    }
+
+    asGameDate() {
+        return {
+            year: this._year,
+            month: this._month,
+            week: this._week,
+        };
     }
 
     normalize() {

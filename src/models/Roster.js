@@ -1,10 +1,13 @@
 export default class Roster {
-    constructor(maxSize) {
-        this.roster = [];
+    constructor(company, maxSize) {
+        this.company = company;
+
         this.maxSize = maxSize;
         if (this.maxSize === undefined) {
             this.maxSize = null;
         }
+
+        this.roster = [];
     }
 
     hasRoom() {
@@ -14,6 +17,7 @@ export default class Roster {
     hire(talent) {
         if (this.hasRoom() && !this.roster.includes(talent)) {
             this.roster.push(talent);
+            talent.onHire(this.company);
             return true;
         }
         return false;
@@ -23,6 +27,7 @@ export default class Roster {
         let index = this.roster.indexOf(talent);
         if (index !== -1) {
             this.roster.splice(index, 1);
+            talent.onFire();
             return true;
         }
         return false;

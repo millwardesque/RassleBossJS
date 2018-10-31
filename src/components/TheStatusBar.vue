@@ -70,6 +70,10 @@ export default {
                     title: 'Fire Talent',
                     to: "/fire"
                 },
+                {
+                    title: 'View Roster',
+                    to: "/roster"
+                },
             ],
             paused: false,
         };

@@ -9,11 +9,11 @@
 
                     <v-list v-if="freeAgents.roster.length">
                         <v-list-tile
-                          v-for="talent in freeAgents.roster"
+                          v-for="talent in sortedFreeAgents"
                           :key="talent.id"
                         >
                             <v-list-tile-content>
-                                <v-list-tile-title v-text="talent.name"></v-list-tile-title>
+                                <v-list-tile-title v-text="talentLabel(talent)"></v-list-tile-title>
                             </v-list-tile-content>
 
                             <v-list-tile-action>
@@ -33,6 +33,7 @@
 <script>
 
 import BaseWell from './BaseWell'
+import Mixins from '../Mixins'
 
 export default {
     name: 'HireTalent',
@@ -49,6 +50,19 @@ export default {
         roster: function() {
             return this.company.roster;
         },
+        sortedFreeAgents: function() {
+            return this.freeAgents.roster.slice(0).sort((a, b) => {
+                if (a.name < b.name) {
+                    return -1;
+                }
+                else if (a.name > b.name) {
+                    return 1;
+                }
+                else {
+                    return 0;
+                }
+            });
+        }
     },
     props: {
         sharedData: Object,
@@ -58,7 +72,11 @@ export default {
             if (this.company.hire(talent)) {
                 this.freeAgents.fire(talent);
             }
-        }
+        },
+        talentLabel(talent) {
+            return `${talent.name} (${this.formatCurrency(talent.contract.signingFee)} now, ${this.formatCurrency(talent.contract.annualSalary)} annually)`;
+        },
     },
+    mixins: [Mixins],
 }
 </script>
