@@ -60,9 +60,7 @@ export default {
     },
     methods: {
         fire: function(talent) {
-            if (this.freeAgents.hire(talent)) {
-                this.roster.fire(talent);
-            }
+            this.roster.fire(talent);
         },
         talentLabel(talent) {
             return `${talent.name} (${this.formatCurrency(talent.contract.annualSalary)} annually)`;

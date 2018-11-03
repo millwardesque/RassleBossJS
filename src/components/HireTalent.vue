@@ -7,7 +7,7 @@
                         <v-toolbar-title>Hire Talent</v-toolbar-title>
                     </v-toolbar>
 
-                    <v-list v-if="freeAgents.roster.length">
+                    <v-list v-if="freeAgents.length">
                         <v-list-tile
                           v-for="talent in sortedFreeAgents"
                           :key="talent.id"
@@ -51,7 +51,8 @@ export default {
             return this.company.roster;
         },
         sortedFreeAgents: function() {
-            return this.freeAgents.roster.slice(0).sort((a, b) => {
+
+            return this.freeAgents.slice(0).sort((a, b) => {
                 if (a.name < b.name) {
                     return -1;
                 }
@@ -69,9 +70,7 @@ export default {
     },
     methods: {
         hire: function(talent) {
-            if (this.company.hire(talent)) {
-                this.freeAgents.fire(talent);
-            }
+            this.company.hire(talent);
         },
         talentLabel(talent) {
             return `${talent.name} (${this.formatCurrency(talent.contract.signingFee)} now, ${this.formatCurrency(talent.contract.annualSalary)} annually)`;

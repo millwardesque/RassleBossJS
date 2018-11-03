@@ -5,12 +5,10 @@ class MessageHandler {
 
     sendMessage(messageName, messageData) {
         if (messageName in this.listeners) {
+            // console.log(`[MessageHandler] Caught ${messageName}: ${this.listeners[messageName].length} listeners.`);
             for (let listener of this.listeners[messageName]) {
                 listener(messageName, messageData);
             }
-        }
-        else {
-            console.log(`[MessageHandler] No listeners for ${messageName}`);
         }
     }
 
