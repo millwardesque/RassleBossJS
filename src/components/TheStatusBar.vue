@@ -74,6 +74,10 @@ export default {
                     title: 'View Roster',
                     to: "/roster"
                 },
+                {
+                    title: 'Company Rankings',
+                    to: "/company-ranking"
+                },
             ],
             paused: false,
         };

@@ -25,6 +25,7 @@ import TheStatusBar from './components/TheStatusBar'
 import InterruptionQueue from './models/InterruptionQueue'
 import BaseInterruption from './components/BaseInterruption'
 
+
 export default {
     name: 'App',
     components: {

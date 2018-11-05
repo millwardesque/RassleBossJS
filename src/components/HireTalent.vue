@@ -3,7 +3,7 @@
         <v-layout row>
             <v-flex xs12 sm6 offset-sm3>
                 <v-card>
-                    <v-toolbar color="primary">
+                    <v-toolbar color="primary" dark>
                         <v-toolbar-title>Hire Talent</v-toolbar-title>
                     </v-toolbar>
 

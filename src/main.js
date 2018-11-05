@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import './plugins/vuetify'
 import App from './App.vue'
 
+import CompanyRanking from './components/CompanyRanking'
 import FireTalent from './components/FireTalent'
 import HireTalent from './components/HireTalent'
 import InGameState from './models/InGameState'
@@ -41,6 +42,14 @@ const routes = [
             sharedData: sharedData,
         },
     },
+    {
+        name: 'Company Ranking',
+        path: '/company-ranking',
+        component: CompanyRanking,
+        props: {
+            sharedData: sharedData,
+        },
+    }
 ];
 
 const router = new VueRouter({
