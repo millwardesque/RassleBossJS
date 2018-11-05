@@ -17,20 +17,23 @@ export default class Talent {
     }
 
     onDateChange(name, data) {
-        let quitSatisfactionThreshold = 0.25;
-        let quitSatisfactionChance = 0.01;
+        let quitSatisfactionThreshold = 0.1;
+        let quitSatisfactionChance = 0.001;
 
         if (data.newDate.week != data.oldDate.week) {
             this.weeksAtCompany++;
 
-            let decayDuration = 52;
-            this.satisfaction -= Math.max(0, 1.0 / decayDuration);
+            if (this.company != null) {
+                let decayDuration = 52;
+                this.satisfaction -= 1.0 / decayDuration;
+                this.satisfaction = Math.max(0, this.satisfaction);
 
-            if (this.company != null && this.satisfaction < quitSatisfactionThreshold) {
-                if (Math.random() < quitSatisfactionChance) {
-                    InterruptionQueue.enqueue(new Interruption(`${this.name} quits!`, `After ${this.weeksAtCompany} weeks here, I'm fed up and leaving. Sayonara!`, () => {
-                        this.company.fire(this);
-                    }));
+                if (this.company != null && this.satisfaction < quitSatisfactionThreshold) {
+                    if (Math.random() < quitSatisfactionChance) {
+                        InterruptionQueue.enqueue(new Interruption(`${this.name} quits!`, `After ${this.weeksAtCompany} weeks here, I'm fed up and leaving. Sayonara!`, () => {
+                            this.company.fire(this);
+                        }));
+                    }
                 }
             }
         }
@@ -45,5 +48,6 @@ export default class Talent {
     onFire() {
         this.company = null;
         this.weeksAtCompany = 0;
+        this.satisfaction = 0;
     }
 }

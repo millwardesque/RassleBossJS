@@ -71,7 +71,7 @@ export default {
     },
     computed: {
         sortedCompanies: function() {
-            let sorted = this.sharedData.gameState.allCompanies.splice(0);
+            let sorted = this.sharedData.gameState.allCompanies.slice(0);
             sorted.sort((a, b) => {
                 if (this.isPlayerCompany(a)) {
                     return -1;

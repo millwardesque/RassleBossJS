@@ -63,6 +63,10 @@ export default {
         return {
             menuItems: [
                 {
+                    title: 'Locations',
+                    to: "/locations"
+                },
+                {
                     title: 'Hire Talent',
                     to: "/hire",
                 },

@@ -1,7 +1,7 @@
 <template>
     <v-container fluid>
         <v-layout row>
-            <v-flex xs12 sm6 offset-sm3>
+            <v-flex xs12>
                 <v-card>
                     <v-toolbar color="primary" dark>
                         <v-toolbar-title>Company rankings</v-toolbar-title>
@@ -55,7 +55,7 @@ export default {
          * Sorts the companies by descending wealth.
          */
         companiesByWealth: function() {
-            let sorted = this.sharedData.gameState.allCompanies.splice(0);
+            let sorted = this.sharedData.gameState.allCompanies.slice(0);
             sorted.sort((a, b) => {
                 if (a.bank < b.bank) {
                     return 1;
@@ -70,7 +70,7 @@ export default {
             return sorted;
         },
         companiesBySatisfaction: function() {
-            let sorted = this.sharedData.gameState.allCompanies.splice(0);
+            let sorted = this.sharedData.gameState.allCompanies.slice(0);
             sorted.sort((a, b) => {
 
                 if (a.satisfaction < b.satisfaction) {

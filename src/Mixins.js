@@ -28,5 +28,20 @@ export default {
         formatPlainNumber: function(number) {
             return plainFormatter.format(number);
         },
+
+        /**
+         * Generic sort by name-property on a set of objects
+         */
+        nameSort: function(a, b) {
+            if (a.name < b.name) {
+                return -1;
+            }
+            else if (a.name > b.name) {
+                return 1;
+            }
+            else {
+                return 0;
+            }
+        }
     }
 }

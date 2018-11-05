@@ -7,6 +7,7 @@ import App from './App.vue'
 import CompanyRanking from './components/CompanyRanking'
 import FireTalent from './components/FireTalent'
 import HireTalent from './components/HireTalent'
+import Locations from './components/Locations'
 import InGameState from './models/InGameState'
 import ViewRoster from './components/ViewRoster'
 
@@ -18,6 +19,14 @@ var sharedData = {
 }
 
 const routes = [
+    {
+        name: 'Locations',
+        path: '/locations',
+        component: Locations,
+        props: {
+            sharedData: sharedData,
+        },
+    },
     {
         name: 'Fire Talent',
         path: '/fire',
