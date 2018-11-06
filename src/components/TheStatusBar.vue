@@ -67,6 +67,10 @@ export default {
                     to: "/locations"
                 },
                 {
+                    title: 'Edit Program',
+                    to: "/program/edit"
+                },
+                {
                     title: 'Hire Talent',
                     to: "/hire",
                 },

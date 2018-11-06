@@ -5,6 +5,7 @@ import './plugins/vuetify'
 import App from './App.vue'
 
 import CompanyRanking from './components/CompanyRanking'
+import EditProgram from './components/EditProgram'
 import FireTalent from './components/FireTalent'
 import HireTalent from './components/HireTalent'
 import Locations from './components/Locations'
@@ -23,6 +24,14 @@ const routes = [
         name: 'Locations',
         path: '/locations',
         component: Locations,
+        props: {
+            sharedData: sharedData,
+        },
+    },
+    {
+        name: 'Edit Program',
+        path: '/program/edit',
+        component: EditProgram,
         props: {
             sharedData: sharedData,
         },

@@ -1,3 +1,11 @@
+NEXT:
+Create Angle
+- Traits to prefer some wrestlers to others
+- Wrestler compatibility
+- Wrestlers can't already be in a program
+- Assign the created program to a wrestler
+
+IDEAS AND STUFF
 * Make a game out of hiring / firing
  - Monthly income derived from house shows
  - [Interruption] Talent injuries

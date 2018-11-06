@@ -5,14 +5,17 @@ import Location from './Location'
 import MessageHandler from './MessageHandler'
 import Talent from './Talent'
 import TalentContract from './TalentContract'
+import Venue from './Venue'
 
 export default class InGameState {
     constructor() {
         this.clock = new GameClock(1, 1, 1, 1000);
         this.company = null;
         this.locations = [];
+        this.venues = [];
         this.rivalCompanies = [];
         this.talent = [];
+        this.availableAngles = [];
 
         MessageHandler.addListener('clock-datechange', (name, data) => {
             this.onDateChange(name, data);
@@ -30,6 +33,14 @@ export default class InGameState {
         this.locations.push(new Location('ottawa_ontario_canada', 'Ottawa, ON, Canada', 45.4215, 75.6972));
         this.locations.push(new Location('bixby_oklahoma_us', 'Bixby, OK, US', 35.9420, -95.8833));
         this.locations.push(new Location('minneapolis_minnesota_us', 'Minneapolis, MN, US', 44.9778, 93.2650))
+
+        // Load venues
+        this.venues.push(new Venue('skydome', 'Skydome', this.locations[0], 75000));
+        this.venues.push(new Venue('maple-leaf-gardens', 'Maple Leaf Gardens', this.locations[0], 50000));
+        this.venues.push(new Venue('london-civic-centre', 'London Civic Centre', this.locations[1], 10000));
+        this.venues.push(new Venue('canadian-tire-centre', 'Canadian Tire Centre', this.locations[2], 10000));
+        this.venues.push(new Venue('bixby-community-centre', 'Bixby Community Centre', this.locations[3], 5000));
+        this.venues.push(new Venue('superdome', 'Minneapolis Superdome', this.locations[4], 50000));
 
         // Load talent
         this.talent.push(new Talent("ricky-steamboat", "Ricky Steamboat", new TalentContract(10000, 80000)));
@@ -63,6 +74,10 @@ export default class InGameState {
         awa.hire(this.talent[7]);
         awa.hire(this.talent[8]);
         awa.hire(this.talent[9]);
+
+        // Load angles
+        this.availableAngles.push({ id: "double-cross", name: "Double cross"});
+        this.availableAngles.push({ id: "long-term-rivals", name: "Long-term rivals"});
     }
 
     get freeAgents() {
