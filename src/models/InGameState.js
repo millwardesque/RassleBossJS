@@ -104,7 +104,6 @@ export default class InGameState {
         if (index !== -1) {
             program.cancelProgram();
             this.programs.splice(index, 1);
-            console.log(index, this.programs);
         }
     }
 

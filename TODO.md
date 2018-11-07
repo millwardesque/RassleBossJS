@@ -1,5 +1,4 @@
 NEXT:
-Edit existing programs from list page
 
 IDEAS AND STUFF
 * Make a game out of hiring / firing

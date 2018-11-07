@@ -6,7 +6,7 @@
                     <v-toolbar color="primary" dark>
                         <v-toolbar-title>Programs</v-toolbar-title>
                         <v-spacer />
-                        <v-btn icon ripple to='/program/edit'>
+                        <v-btn icon ripple :to="{ name: 'edit-program', params: { sharedData: sharedData, existingProgram: null, } }">
                             <v-icon color="grey lighten-1">add</v-icon>
                         </v-btn>
                     </v-toolbar>
@@ -26,6 +26,11 @@
                                     </v-list-tile-sub-title>
                                 </v-list-tile-content>
 
+                                <v-list-tile-action>
+                                    <v-btn ripple :to="{ name: 'edit-program', params: { sharedData: sharedData, existingProgram: program, } }">
+                                        <v-icon color="grey lighten-1">edit</v-icon>
+                                    </v-btn>
+                                </v-list-tile-action>
                                 <v-list-tile-action>
                                     <v-btn icon ripple @click="cancelProgram(program)">
                                         <v-icon color="grey lighten-1">remove</v-icon>

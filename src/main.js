@@ -22,7 +22,7 @@ var sharedData = {
 
 const routes = [
     {
-        name: 'Locations',
+        name: 'locations',
         path: '/locations',
         component: Locations,
         props: {
@@ -30,7 +30,7 @@ const routes = [
         },
     },
     {
-        name: 'View Programs',
+        name: 'view-programs',
         path: '/program/list',
         component: ViewPrograms,
         props: {
@@ -38,15 +38,13 @@ const routes = [
         },
     },
     {
-        name: 'Edit Program',
+        name: 'edit-program',
         path: '/program/edit',
         component: EditProgram,
-        props: {
-            sharedData: sharedData,
-        },
+        props: true,
     },
     {
-        name: 'Fire Talent',
+        name: 'fire-talent',
         path: '/fire',
         component: FireTalent,
         props: {
@@ -54,7 +52,7 @@ const routes = [
         },
     },
     {
-        name: 'Hire Talent',
+        name: 'hire-talent',
         path: '/hire',
         component: HireTalent,
         props: {
@@ -62,7 +60,7 @@ const routes = [
         },
     },
     {
-        name: 'View Roster',
+        name: 'view-roster',
         path: '/roster',
         component: ViewRoster,
         props: {
@@ -70,7 +68,7 @@ const routes = [
         },
     },
     {
-        name: 'Company Ranking',
+        name: 'company-ranking',
         path: '/company-ranking',
         component: CompanyRanking,
         props: {

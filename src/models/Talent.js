@@ -19,7 +19,7 @@ export default class Talent {
 
     onDateChange(name, data) {
         let quitSatisfactionThreshold = 0.1;
-        let quitSatisfactionChance = 0.001;
+        let quitSatisfactionChance = 0.0001;
 
         if (data.newDate.week != data.oldDate.week) {
             this.weeksAtCompany++;

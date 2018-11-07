@@ -67,10 +67,6 @@ export default {
                     to: "/locations"
                 },
                 {
-                    title: 'Edit Program',
-                    to: "/program/edit"
-                },
-                {
                     title: 'View Programs',
                     to: "/program/list"
                 },
