@@ -6,6 +6,7 @@ import App from './App.vue'
 
 import CompanyRanking from './components/CompanyRanking'
 import EditProgram from './components/EditProgram'
+import ViewPrograms from './components/ViewPrograms'
 import FireTalent from './components/FireTalent'
 import HireTalent from './components/HireTalent'
 import Locations from './components/Locations'
@@ -24,6 +25,14 @@ const routes = [
         name: 'Locations',
         path: '/locations',
         component: Locations,
+        props: {
+            sharedData: sharedData,
+        },
+    },
+    {
+        name: 'View Programs',
+        path: '/program/list',
+        component: ViewPrograms,
         props: {
             sharedData: sharedData,
         },

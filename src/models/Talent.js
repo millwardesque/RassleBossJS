@@ -9,6 +9,7 @@ export default class Talent {
         this.contract = contract;
         this.weeksAtCompany = 0;
         this.company = null;
+        this.program = null;
         this.satisfaction = 0;
 
         MessageHandler.addListener('clock-datechange', (name, data) => {
@@ -47,6 +48,7 @@ export default class Talent {
 
     onFire() {
         this.company = null;
+        this.program = null;
         this.weeksAtCompany = 0;
         this.satisfaction = 0;
     }

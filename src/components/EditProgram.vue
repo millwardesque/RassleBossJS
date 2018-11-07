@@ -17,50 +17,64 @@
             <v-flex xs12 sm6 offset-sm3>
                 <v-card>
                     <v-toolbar color="primary" dark>
-                        <v-toolbar-title>Create program</v-toolbar-title>
+                        <v-toolbar-title>Edit program</v-toolbar-title>
+                        <v-spacer />
+                        <v-btn ripple to='/program/list'>
+                            List
+                        </v-btn>
                     </v-toolbar>
 
                     <template v-if="sortedRoster.length >= 2">
-                        <v-layout>
-                            <v-list xs4>
-                                <v-list-tile
-                                  v-for="talent in sortedRoster"
-                                  :key="talent.id + '-A'"
-                                  class="choice"
-                                  :class="(isTalentInGroupA(talent) ? 'selected' : '') + ' ' + (isTalentInGroupB(talent) ? 'unavailable' : '')"
+                        <v-container>
+                            <v-layout row wrap>
+                                <v-list xs5>
+                                    <v-list-tile
+                                      v-for="talent in sortedRoster"
+                                      :key="talent.id + '-A'"
+                                      class="choice"
+                                      :class="(isTalentInGroupA(talent) ? 'selected' : '') + ' ' + (isTalentInGroupB(talent) ? 'unavailable' : '')"
+                                    >
+                                        <v-list-tile-content>
+                                            <v-list-tile-title v-text="talentLabel(talent)" @click="onTalentAClick(talent)"></v-list-tile-title>
+                                        </v-list-tile-content>
+                                    </v-list-tile>
+                                </v-list>
+                                <v-list xs2>
+                                    <v-list-tile
+                                      v-for="angle in sortedAngles"
+                                      :key="angle.id"
+                                      class="choice"
+                                      :class="isSelectedAngle(angle) ? 'selected' : (selectedAngle !== null) ? 'unavailable' : ''"
+                                    >
+                                        <v-list-tile-content>
+                                            <v-list-tile-title v-text="angle.name" @click="onAngleClick(angle)"></v-list-tile-title>
+                                        </v-list-tile-content>
+                                    </v-list-tile>
+                                </v-list>
+                                <v-list xs5>
+                                    <v-list-tile
+                                      v-for="talent in sortedRoster"
+                                      :key="talent.id + '-B'"
+                                      class="choice"
+                                      :class="(isTalentInGroupB(talent) ? 'selected' : '') + ' ' + (isTalentInGroupA(talent) ? 'unavailable' : '')"
+                                    >
+                                        <v-list-tile-content>
+                                            <v-list-tile-title v-text="talentLabel(talent)" @click="onTalentBClick(talent)"></v-list-tile-title>
+                                        </v-list-tile-content>
+                                    </v-list-tile>
+                                </v-list>
+                            </v-layout>
+                            <v-layout row wrap justify-end>
+                                <v-btn
+                                    color="primary"
+                                    @click="saveProgram"
                                 >
-                                    <v-list-tile-content>
-                                        <v-list-tile-title v-text="talentLabel(talent)" @click="onTalentAClick(talent)"></v-list-tile-title>
-                                    </v-list-tile-content>
-                                </v-list-tile>
-                            </v-list>
-                            <v-list xs2>
-                                <v-list-tile
-                                  v-for="angle in sortedAngles"
-                                  :key="angle.id"
-                                  class="choice"
-                                  :class="isSelectedAngle(angle) ? 'selected' : (selectedAngle !== null) ? 'unavailable' : ''"
-                                >
-                                    <v-list-tile-content>
-                                        <v-list-tile-title v-text="angle.name" @click="onAngleClick(angle)"></v-list-tile-title>
-                                    </v-list-tile-content>
-                                </v-list-tile>
-                            </v-list>
-                            <v-list xs4>
-                                <v-list-tile
-                                  v-for="talent in sortedRoster"
-                                  :key="talent.id + '-B'"
-                                  class="choice"
-                                  :class="(isTalentInGroupB(talent) ? 'selected' : '') + ' ' + (isTalentInGroupA(talent) ? 'unavailable' : '')"
-                                >
-                                    <v-list-tile-content>
-                                        <v-list-tile-title v-text="talentLabel(talent)" @click="onTalentBClick(talent)"></v-list-tile-title>
-                                    </v-list-tile-content>
-                                </v-list-tile>
-                            </v-list>
-                        </v-layout>
+                                    Save
+                                </v-btn>
+                            </v-layout>
+                        </v-container>
                     </template>
-                    <base-well v-else>There aren't any free agents right now.</base-well>
+                    <base-well v-else>There isn't any available talent right now.</base-well>
                 </v-card>
             </v-flex>
         </v-layout>
@@ -71,6 +85,7 @@
 
 import BaseWell from './BaseWell'
 import Mixins from '../Mixins'
+import Program from '../models/Program'
 
 export default {
     name: 'EditProgram',
@@ -88,18 +103,8 @@ export default {
             return this.sharedData.gameState.availableAngles;
         },
         sortedRoster: function() {
-            return this.roster.roster.slice(0).sort((a, b) => {
-                if (a.name < b.name) {
-                    return -1;
-                }
-                else if (a.name > b.name) {
-                    return 1;
-                }
-                else {
-                    return 0;
-                }
-            });
-        }
+            return this.roster.roster.slice(0).filter(this.filterAvailableTalent).sort(this.nameSort);
+        },
     },
     data: function() {
         return {
@@ -112,6 +117,16 @@ export default {
         sharedData: Object,
     },
     methods: {
+        filterAvailableTalent: function(talent) {
+            for (let program of this.sharedData.gameState.programs) {
+                for (let team of program.teams) {
+                    if (team.indexOf(talent) !== -1) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        },
         isTalentInGroupA(talent) {
             return (this.selectedTalentA.indexOf(talent) !== -1);
         },
@@ -146,6 +161,18 @@ export default {
             else {
                 this.selectedAngle = null;
             }
+        },
+        saveProgram() {
+            let teams = [];
+            teams.push(this.selectedTalentA);
+            teams.push(this.selectedTalentB);
+
+            let program = new Program(teams, this.selectedAngle);
+            this.sharedData.gameState.programs.push(program);
+
+            this.selectedTalentA = [];
+            this.selectedTalentB = [];
+            this.selectedAngle = null;
         },
         talentLabel(talent) {
             return `${talent.name}`;

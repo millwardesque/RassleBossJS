@@ -71,6 +71,10 @@ export default {
                     to: "/program/edit"
                 },
                 {
+                    title: 'View Programs',
+                    to: "/program/list"
+                },
+                {
                     title: 'Hire Talent',
                     to: "/hire",
                 },

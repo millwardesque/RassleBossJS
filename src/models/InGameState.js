@@ -3,6 +3,7 @@ import GameClock from './GameClock'
 import InterruptionQueue from './InterruptionQueue'
 import Location from './Location'
 import MessageHandler from './MessageHandler'
+import Program from './Program'
 import Talent from './Talent'
 import TalentContract from './TalentContract'
 import Venue from './Venue'
@@ -16,6 +17,7 @@ export default class InGameState {
         this.rivalCompanies = [];
         this.talent = [];
         this.availableAngles = [];
+        this.programs = [];
 
         MessageHandler.addListener('clock-datechange', (name, data) => {
             this.onDateChange(name, data);
@@ -78,6 +80,13 @@ export default class InGameState {
         // Load angles
         this.availableAngles.push({ id: "double-cross", name: "Double cross"});
         this.availableAngles.push({ id: "long-term-rivals", name: "Long-term rivals"});
+
+        // Reset programs
+        this.programs = [];
+        let teams = [];
+        teams.push([this.talent[0],]);
+        teams.push([this.talent[1],]);
+        this.programs.push(new Program(teams, this.availableAngles[0]))
     }
 
     get freeAgents() {
@@ -88,6 +97,15 @@ export default class InGameState {
 
     get allCompanies() {
         return [...this.rivalCompanies, this.company];
+    }
+
+    cancelProgram(program) {
+        let index = this.programs.indexOf(program);
+        if (index !== -1) {
+            program.cancelProgram();
+            this.programs.splice(index, 1);
+            console.log(index, this.programs);
+        }
     }
 
     onDateChange(name, data) {

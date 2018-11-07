@@ -32,7 +32,13 @@ export default class Company {
     }
 
     fire(talent) {
-        return this.roster.fire(talent);
+        if (this.roster.roster.indexOf(talent) !== -1) {
+            if (talent.program != null) {
+                talent.program.removeTalent(talent);
+            }
+
+            return this.roster.fire(talent);
+        }
     }
 
     onDateChange(name, data) {

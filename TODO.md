@@ -1,9 +1,5 @@
 NEXT:
-Create Angle
-- Traits to prefer some wrestlers to others
-- Wrestler compatibility
-- Wrestlers can't already be in a program
-- Assign the created program to a wrestler
+Edit existing programs from list page
 
 IDEAS AND STUFF
 * Make a game out of hiring / firing
@@ -11,6 +7,8 @@ IDEAS AND STUFF
  - [Interruption] Talent injuries
  - Companies lure talent away (and vice versa)
  - Pay talent spot bonuses to increase satisfaction
+ - Traits to prefer some wrestlers to others
+ - Wrestler compatibility in programs
  - Wrestler Satisfaction:
    - Avg. Position on card
    - Time away from home
@@ -24,10 +22,6 @@ IDEAS AND STUFF
  - Staff are advisors a la Civilization but who can be replaced to give better advice
    - Each has own demands, suggestions, and desired working conditions
  - Companies can buy each other to get bigger, access to more territories and talent, etc.
-
-Program / angle:
- - Wrestlers
- - Basic story
 
 House shows:
  - Player determines which locations and programs
