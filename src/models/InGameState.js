@@ -10,7 +10,7 @@ import Venue from './Venue'
 
 export default class InGameState {
     constructor() {
-        this.clock = new GameClock(1, 1, 1, 1000);
+        this.clock = new GameClock(1, 1, 1, 1, 1000);
         this.company = null;
         this.locations = [];
         this.venues = [];
@@ -55,11 +55,17 @@ export default class InGameState {
         this.talent.push(new Talent("ultimate-warrior", "The Ultimate Warrior", new TalentContract(70000, 100000)));
         this.talent.push(new Talent("curt-hennig", "Curt Hennig", new TalentContract(50000, 80000)));
         this.talent.push(new Talent("ted-dibiase", "Ted DiBiase", new TalentContract(60000, 60000)));
+        this.talent.push(new Talent("hercules", "Hercules", new TalentContract(25000, 40000)));
+        this.talent.push(new Talent("jim-duggan", "Hacksaw Jim Duggan", new TalentContract(80000, 30000)));
 
         // Load companies
-        this.company = new Company('wwf', 'WWF', 4, 100000, this.locations[0]);
+        this.company = new Company('wwf', 'WWF', 8, 1000000, this.locations[0]);
         this.company.hire(this.talent[0]);
         this.company.hire(this.talent[1]);
+        this.company.hire(this.talent[8]);
+        this.company.hire(this.talent[9]);
+        this.company.hire(this.talent[10]);
+        this.company.hire(this.talent[11]);
         this.company.accessibleLocations.push(this.locations[1]);
         this.company.accessibleLocations.push(this.locations[2]);
 
@@ -74,8 +80,6 @@ export default class InGameState {
         this.rivalCompanies.push(awa);
         awa.hire(this.talent[6]);
         awa.hire(this.talent[7]);
-        awa.hire(this.talent[8]);
-        awa.hire(this.talent[9]);
 
         // Load angles
         this.availableAngles.push({ id: "double-cross", name: "Double cross"});
@@ -86,6 +90,16 @@ export default class InGameState {
         let teams = [];
         teams.push([this.talent[0],]);
         teams.push([this.talent[1],]);
+        this.programs.push(new Program(teams, this.availableAngles[0]))
+
+        teams = [];
+        teams.push([this.talent[2],]);
+        teams.push([this.talent[3],]);
+        this.programs.push(new Program(teams, this.availableAngles[1]))
+
+        teams = [];
+        teams.push([this.talent[4],]);
+        teams.push([this.talent[5],]);
         this.programs.push(new Program(teams, this.availableAngles[0]))
     }
 
@@ -108,8 +122,8 @@ export default class InGameState {
     }
 
     onDateChange(name, data) {
-        if (data.newDate.week == 1 && data.oldDate.week != 1) {
-            this.company.bank += 100000;
+        if (data.newDate.day == 1 && data.oldDate.day != 1) {
+            // Pass
         }
     }
 

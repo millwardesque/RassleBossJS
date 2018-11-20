@@ -14,7 +14,7 @@
 <template>
     <v-container fluid>
         <v-layout row>
-            <v-flex xs12 sm6 offset-sm3>
+            <v-flex xs12 sm10 offset-sm1>
                 <v-card>
                     <v-toolbar color="primary" dark>
                         <v-toolbar-title>{{ title }}</v-toolbar-title>
@@ -25,44 +25,50 @@
                     </v-toolbar>
 
                     <template v-if="sortedRoster.length >= 2">
-                        <v-container>
-                            <v-layout row wrap>
-                                <v-list xs5>
-                                    <v-list-tile
-                                      v-for="talent in sortedRoster"
-                                      :key="talent.id + '-A'"
-                                      class="choice"
-                                      :class="(isTalentInGroupA(talent) ? 'selected' : '') + ' ' + (isTalentInGroupB(talent) ? 'unavailable' : '')"
-                                    >
-                                        <v-list-tile-content>
-                                            <v-list-tile-title v-text="talentLabel(talent)" @click="onTalentAClick(talent)"></v-list-tile-title>
-                                        </v-list-tile-content>
-                                    </v-list-tile>
-                                </v-list>
-                                <v-list xs2>
-                                    <v-list-tile
-                                      v-for="angle in sortedAngles"
-                                      :key="angle.id"
-                                      class="choice"
-                                      :class="isSelectedAngle(angle) ? 'selected' : (selectedAngle !== null) ? 'unavailable' : ''"
-                                    >
-                                        <v-list-tile-content>
-                                            <v-list-tile-title v-text="angle.name" @click="onAngleClick(angle)"></v-list-tile-title>
-                                        </v-list-tile-content>
-                                    </v-list-tile>
-                                </v-list>
-                                <v-list xs5>
-                                    <v-list-tile
-                                      v-for="talent in sortedRoster"
-                                      :key="talent.id + '-B'"
-                                      class="choice"
-                                      :class="(isTalentInGroupB(talent) ? 'selected' : '') + ' ' + (isTalentInGroupA(talent) ? 'unavailable' : '')"
-                                    >
-                                        <v-list-tile-content>
-                                            <v-list-tile-title v-text="talentLabel(talent)" @click="onTalentBClick(talent)"></v-list-tile-title>
-                                        </v-list-tile-content>
-                                    </v-list-tile>
-                                </v-list>
+                        <v-container fluid grid-list-xs>
+                            <v-layout row>
+                                <v-flex xs4>
+                                    <v-list>
+                                        <v-list-tile
+                                          v-for="talent in sortedRoster"
+                                          :key="talent.id + '-A'"
+                                          class="choice"
+                                          :class="(isTalentInGroupA(talent) ? 'selected' : '') + ' ' + (isTalentInGroupB(talent) ? 'unavailable' : '')"
+                                        >
+                                            <v-list-tile-content>
+                                                <v-list-tile-title v-text="talentLabel(talent)" @click="onTalentAClick(talent)"></v-list-tile-title>
+                                            </v-list-tile-content>
+                                        </v-list-tile>
+                                    </v-list>
+                                </v-flex>
+                                <v-flex xs4>
+                                    <v-list>
+                                        <v-list-tile
+                                          v-for="angle in sortedAngles"
+                                          :key="angle.id"
+                                          class="choice"
+                                          :class="isSelectedAngle(angle) ? 'selected' : (selectedAngle !== null) ? 'unavailable' : ''"
+                                        >
+                                            <v-list-tile-content>
+                                                <v-list-tile-title v-text="angle.name" @click="onAngleClick(angle)"></v-list-tile-title>
+                                            </v-list-tile-content>
+                                        </v-list-tile>
+                                    </v-list>
+                                </v-flex>
+                                <v-flex xs4>
+                                    <v-list>
+                                        <v-list-tile
+                                          v-for="talent in sortedRoster"
+                                          :key="talent.id + '-B'"
+                                          class="choice"
+                                          :class="(isTalentInGroupB(talent) ? 'selected' : '') + ' ' + (isTalentInGroupA(talent) ? 'unavailable' : '')"
+                                        >
+                                            <v-list-tile-content>
+                                                <v-list-tile-title v-text="talentLabel(talent)" @click="onTalentBClick(talent)"></v-list-tile-title>
+                                            </v-list-tile-content>
+                                        </v-list-tile>
+                                    </v-list>
+                                </v-flex>
                             </v-layout>
                             <v-layout row wrap justify-end>
                                 <v-btn

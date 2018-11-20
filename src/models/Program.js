@@ -15,7 +15,7 @@ export default class Program {
     }
 
     removeTalent(talent) {
-        for (let team of teams) {
+        for (let team of this.teams) {
             let index = team.indexOf(talent);
             if (index !== -1) {
                 talent.program = null;
@@ -39,6 +39,18 @@ export default class Program {
             label += this.teams[index][i].name;
             if (i + 1 < this.teams[index][i].length) {
                 label += ', ';
+            }
+        }
+        return label;
+    }
+
+    get label() {
+        let label = '';
+        for (let i = 0; i < this.teams.length; ++i) {
+            label += this.teamLabel(i);
+
+            if (i + 1 < this.teams.length) {
+                label += ' vs. ';
             }
         }
         return label;

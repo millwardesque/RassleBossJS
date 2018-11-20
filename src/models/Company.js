@@ -1,7 +1,6 @@
 import MessageHandler from './MessageHandler'
 import Roster from './Roster'
 
-
 export default class Company {
     constructor(id, name, rosterSize, bank, homeLocation) {
         this.id = id;

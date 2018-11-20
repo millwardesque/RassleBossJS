@@ -1,4 +1,8 @@
-NEXT:
+NEXT: Create house show
+- Select date
+- Save show
+- Nicer UI (Stepper / tabs? Calendar date selector? Better program info)
+THEN: List / edit / delete house shows
 
 IDEAS AND STUFF
 * Make a game out of hiring / firing
@@ -21,6 +25,7 @@ IDEAS AND STUFF
  - Staff are advisors a la Civilization but who can be replaced to give better advice
    - Each has own demands, suggestions, and desired working conditions
  - Companies can buy each other to get bigger, access to more territories and talent, etc.
+ - Talent leaves much faster when company can't pay salary
 
 House shows:
  - Player determines which locations and programs

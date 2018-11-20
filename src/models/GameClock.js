@@ -1,21 +1,23 @@
 import MessageHandler from './MessageHandler'
 
 export default class GameClock {
+    static DaysPerWeek = 7;
     static WeeksPerMonth = 4;
     static MonthsPerYear = 12;
 
-    constructor(year, month, week, weekDurationInMs) {
+    constructor(year, month, week, day, dayDurationInMs) {
         this._year = year;
         this._month = month;
         this._week = week;
-        this.weekDurationInMs = weekDurationInMs;
+        this._day = day;
+        this.dayDurationInMs = dayDurationInMs;
         this.timer = null;
     }
 
     start() {
         this.timer = setInterval(() => {
-            this.week++;
-        }, this.weekDurationInMs);
+            this.day++;
+        }, this.dayDurationInMs);
     }
 
     stop() {
@@ -42,10 +44,18 @@ export default class GameClock {
         return this._week;
     }
     set week(w) {
-        if (w != this._week) {
+        this._week = w;
+        this.normalize();
+    }
+
+    get day() {
+        return this._day;
+    }
+    set day(d) {
+        if (d != this._day) {
             let oldDate = this.asGameDate()
 
-            this._week = w;
+            this._day = d;
             this.normalize();
 
             let newDate = this.asGameDate();
@@ -62,10 +72,20 @@ export default class GameClock {
             year: this._year,
             month: this._month,
             week: this._week,
+            day: this._day,
         };
     }
 
     normalize() {
+        while (this._day > GameClock.DaysPerWeek) {
+            this._day -= GameClock.DaysPerWeek;
+            this._week += 1;
+        }
+        while (this._day < 1) {
+            this._day += GameClock.DaysPerWeek;
+            this._week -= 1;
+        }
+
         while (this._week > GameClock.WeeksPerMonth) {
             this._week -= GameClock.WeeksPerMonth;
             this._month += 1;

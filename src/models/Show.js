@@ -4,7 +4,4 @@ export default class Show {
         this.venue = venue;
         this.programs = programs;
     }
-
-    calculateResults() {
-    }
 }

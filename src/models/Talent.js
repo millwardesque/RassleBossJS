@@ -7,7 +7,7 @@ export default class Talent {
         this.id = id;
         this.name = name;
         this.contract = contract;
-        this.weeksAtCompany = 0;
+        this.daysAtCompany = 0;
         this.company = null;
         this.program = null;
         this.satisfaction = 0;
@@ -21,17 +21,17 @@ export default class Talent {
         let quitSatisfactionThreshold = 0.1;
         let quitSatisfactionChance = 0.0001;
 
-        if (data.newDate.week != data.oldDate.week) {
-            this.weeksAtCompany++;
+        if (data.newDate.day != data.oldDate.day) {
+            this.daysAtCompany++;
 
             if (this.company != null) {
-                let decayDuration = 52;
+                let decayDuration = 365;
                 this.satisfaction -= 1.0 / decayDuration;
                 this.satisfaction = Math.max(0, this.satisfaction);
 
                 if (this.company != null && this.satisfaction < quitSatisfactionThreshold) {
                     if (Math.random() < quitSatisfactionChance) {
-                        InterruptionQueue.enqueue(new Interruption(`${this.name} quits!`, `After ${this.weeksAtCompany} weeks here, I'm fed up and leaving. Sayonara!`, () => {
+                        InterruptionQueue.enqueue(new Interruption(`${this.name} quits!`, `After ${this.daysAtCompany} days here, I'm fed up and leaving. Sayonara!`, () => {
                             this.company.fire(this);
                         }));
                     }
@@ -42,14 +42,14 @@ export default class Talent {
 
     onHire(company) {
         this.company = company;
-        this.weeksAtCompany = 0;
+        this.daysAtCompany = 0;
         this.satisfaction = 1.0;
     }
 
     onFire() {
         this.company = null;
         this.program = null;
-        this.weeksAtCompany = 0;
+        this.daysAtCompany = 0;
         this.satisfaction = 0;
     }
 }

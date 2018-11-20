@@ -13,7 +13,7 @@ class InterruptionQueue {
     }
 
     onDateChange(name, data) {
-        if (data.newDate.week != data.oldDate.week) {
+        if (data.newDate.day != data.oldDate.day) {
             if (this.queue.length > 0) {
                 this.dequeue();
             }

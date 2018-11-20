@@ -18,7 +18,7 @@
                               :key="index"
                             >
                                 <v-list-tile-content>
-                                    <v-list-tile-title v-text="programLabel(program)"></v-list-tile-title>
+                                    <v-list-tile-title v-text="program.label"></v-list-tile-title>
                                     <v-list-tile-sub-title>
                                         <v-layout>
                                             {{ program.angle.name }}
@@ -67,17 +67,6 @@ export default {
     methods: {
         cancelProgram(program) {
             this.sharedData.gameState.cancelProgram(program);
-        },
-        programLabel(program) {
-            let label = '';
-            for (let i = 0; i < program.teams.length; ++i) {
-                label += program.teamLabel(i);
-
-                if (i + 1 < program.teams.length) {
-                    label += ' vs. ';
-                }
-            }
-            return label;
         },
     },
     mixins: [Mixins],
