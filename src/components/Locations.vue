@@ -32,7 +32,12 @@
                                       :key="location.id"
                                     >
                                         <v-list-tile-content>
-                                            <v-list-tile-title v-text="`${location.name} (${location.lat}, ${location.long})`"></v-list-tile-title>
+                                            <v-list-tile-title v-text="location.label"></v-list-tile-title>
+                                            <v-list-tile-sub-title>
+                                                <v-layout>
+                                                    ({{ location.lat }}, {{ location.long }})
+                                                </v-layout>
+                                            </v-list-tile-sub-title>
                                         </v-list-tile-content>
                                     </v-list-tile>
                                 </v-list>
@@ -68,12 +73,12 @@ export default {
     data: function() {
         let options = [
             {
-                name: "All Locations",
-                locationList: this.allLocations,
-            },
-            {
                 name: "Accessible Locations",
                 locationList: this.accessibleLocations,
+            },
+            {
+                name: "All Locations",
+                locationList: this.allLocations,
             },
         ];
 

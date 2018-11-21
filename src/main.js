@@ -8,6 +8,7 @@ import CompanyRanking from './components/CompanyRanking'
 import EditProgram from './components/EditProgram'
 import ViewPrograms from './components/ViewPrograms'
 import EditShow from './components/EditShow'
+import ViewShows from './components/ViewShows'
 import FireTalent from './components/FireTalent'
 import HireTalent from './components/HireTalent'
 import Locations from './components/Locations'
@@ -44,13 +45,19 @@ const routes = [
         component: EditProgram,
         props: true,
     },
+        {
+        name: 'view-shows',
+        path: '/show/list',
+        component: ViewShows,
+        props: {
+            sharedData: sharedData,
+        },
+    },
     {
         name: 'edit-show',
         path: '/show/edit',
         component: EditShow,
-        props: {    // @DEBUG Temporary. Replace with props: true when show-list is available
-            sharedData: sharedData,
-        },
+        props: true,
     },
     {
         name: 'fire-talent',

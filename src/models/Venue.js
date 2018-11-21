@@ -9,4 +9,8 @@ export default class Venue {
     get cost() {
         return this.eventCost;
     }
+
+    get label() {
+        return `${this.name}, ${this.location.label}`;
+    }
 }

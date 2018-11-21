@@ -4,4 +4,8 @@ export default class Show {
         this.venue = venue;
         this.programs = programs;
     }
+
+    get label() {
+        return `${this.date.label} - ${this.venue.label}`
+    }
 }

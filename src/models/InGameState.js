@@ -1,8 +1,8 @@
 import Company from './Company'
 import GameClock from './GameClock'
+import GameDate from './GameDate'
 import InterruptionQueue from './InterruptionQueue'
 import Location from './Location'
-import MessageHandler from './MessageHandler'
 import Program from './Program'
 import Talent from './Talent'
 import TalentContract from './TalentContract'
@@ -10,7 +10,7 @@ import Venue from './Venue'
 
 export default class InGameState {
     constructor() {
-        this.clock = new GameClock(1, 1, 1, 1, 1000);
+        this.clock = new GameClock(new GameDate(1, 1, 1, 1), 1000);
         this.company = null;
         this.locations = [];
         this.venues = [];
@@ -18,10 +18,7 @@ export default class InGameState {
         this.talent = [];
         this.availableAngles = [];
         this.programs = [];
-
-        MessageHandler.addListener('clock-datechange', (name, data) => {
-            this.onDateChange(name, data);
-        });
+        this.shows = [];
 
         InterruptionQueue.clock = this.clock;
 
@@ -121,9 +118,10 @@ export default class InGameState {
         }
     }
 
-    onDateChange(name, data) {
-        if (data.newDate.day == 1 && data.oldDate.day != 1) {
-            // Pass
+    cancelShow(show) {
+        let index = this.shows.indexOf(show);
+        if (index !== -1) {
+            this.shows.splice(index, 1);
         }
     }
 

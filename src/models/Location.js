@@ -11,4 +11,8 @@ export default class Location {
         let longSq = (this.long - long) * (this.long - long);
         return Math.sqrt(latSq + longSq);
     }
+
+    get label() {
+        return this.name;
+    }
 }

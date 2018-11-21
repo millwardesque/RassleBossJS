@@ -36,7 +36,7 @@
             </v-flex>
             <v-spacer />
             <v-flex xs2 class="subheading pt-3">
-                <BaseGameClock :clock="gameState.clock"/>
+                <BaseGameDate :date="gameState.clock.gameDate"/>
             </v-flex>
             <v-flex xs2>
                 <v-btn @click="onPause">
@@ -49,14 +49,14 @@
 </template>
 
 <script>
-import BaseGameClock from './BaseGameClock'
+import BaseGameDate from './BaseGameDate'
 import BaseRosterSummary from './BaseRosterSummary'
 import InGameState from '../models/InGameState'
 import Mixins from '../Mixins'
 
 export default {
     components: {
-        BaseGameClock,
+        BaseGameDate,
         BaseRosterSummary,
     },
     data: function() {
@@ -71,8 +71,8 @@ export default {
                     to: "/program/list"
                 },
                 {
-                    title: 'Edit Show',
-                    to: "/show/edit"
+                    title: 'View Shows',
+                    to: "/show/list"
                 },
                 {
                     title: 'Hire Talent',

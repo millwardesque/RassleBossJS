@@ -1,8 +1,4 @@
-NEXT: Create house show
-- Select date
-- Save show
-- Nicer UI (Stepper / tabs? Calendar date selector? Better program info)
-THEN: List / edit / delete house shows
+NEXT: Model cost of house show
 
 IDEAS AND STUFF
 * Make a game out of hiring / firing
@@ -37,3 +33,5 @@ House shows:
 
 Company rankings:
  - Best performance
+
+? Do we need week as a date field?
